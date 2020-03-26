@@ -20,17 +20,22 @@ test1 <- test[c(44,47,81)]
 
 
 #Modelo en base a lo anterior
-modelo <- naiveBayes(SalePrice~.,data = train1)
-modelo
+modeloX1 <- naiveBayes(X1stFlrSF~ SalePrice,data = train)
+modeloGr <- naiveBayes(GrLivArea~ SalePrice,data = train1)
+
+modelo <- naiveBayes(SalePrice~., data = train1)
+
+predBayesX1 <- predict(modeloX1, newdata = test)
+predBayesGr <-predict(modeloGr, newdata = test1)
 
 predBayes <- predict(modelo, newdata = test1)
 
-predBayes
+confusionMatrix(predBayesX1, test1$X1stFlrSF)
 
-confusionMatrix(predBayes, test$SalePrice)
+#-----------------------------------
 
-
-
+ct <- trainControl(method = "cv", train1[,1:3], number = 10, verboseIter = T)
+modeloCaret <- train(SalePrice~., data = data1, method = "nb", trControl = ct)
 
 
 
