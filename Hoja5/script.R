@@ -23,14 +23,12 @@ test1 <- test[c(44,47,81)]
 modeloX1 <- naiveBayes(X1stFlrSF~ SalePrice,data = train)
 modeloGr <- naiveBayes(GrLivArea~ SalePrice,data = train1)
 
-modelo <- naiveBayes(SalePrice~., data = train1)
 
 predBayesX1 <- predict(modeloX1, newdata = test)
 predBayesGr <-predict(modeloGr, newdata = test1)
 
-predBayes <- predict(modelo, newdata = test1)
 
-confusionMatrix(predBayesX1, test1$X1stFlrSF)
+confusionMatrix(predBayes, test$X1stFlrSF)
 
 #-----------------------------------
 
